@@ -3,17 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <button id="pauseButton" class="pause-button">Pause</button>
     <link rel="stylesheet" href="estilo.css">
     <title>Romantic Shooter Game</title>
 </head>
 <body>
+    <div id="introScreen">
+        <h1>Romantic Shooter Game</h1>
+        <p>Una aventura romántica, conquista la luna siendo un sol de persona. ¡Buena suerte!</p>
+        <button id="startButton">Start</button>
+    </div>
     <div class="score"> Puntos: <span id="score">0</span></div>
     <div class="game-over" id="gameOver">Moon Over!</div>
+    <button id="pauseButton" class="pause-button">Pause</button>
     <canvas id="gameCanvas"></canvas>
     <script src="logica.js"></script>
 </body>
 </html>
+
 
 
 
