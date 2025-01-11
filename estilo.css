@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to bottom, #001f3f, #011a33);
+    color: white;
+    background: url('fondo.png') no-repeat center center fixed;
+    background-size: cover;
+}
+
+canvas {
+    display: block;
+}
+
+.score {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 20px;
+}
+.game-over {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 36px;
+    color: red;
+    display: none;
+}
