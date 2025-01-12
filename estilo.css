@@ -12,6 +12,12 @@ canvas {
     display: block;
 }
 
+.descripcion {
+    font-size: 22px; /* Cambia el tamaño de la letra */
+    font-family: 'Arial', sans-serif; /* Cambia el tipo de letra */
+}
+
+
 .score {
     position: absolute;
     top: 10px;
@@ -25,6 +31,7 @@ canvas {
     transform: translate(-50%, -50%);
     font-size: 36px;
     display: none;
+    background-color: red;
 }
 .pause-button {
     position: absolute;
@@ -32,7 +39,7 @@ canvas {
     right: 20px;
     padding: 10px 20px;
     font-size: 18px;
-    background-color: red;
+    background-color: rgb(11, 23, 139);
     color: white;
     border: none;
     cursor: pointer;
@@ -49,23 +56,37 @@ canvas {
     color: white;
 }
 
-#startButton, #pauseButton {
+#startButton, #pauseButton, #detailsButton, #backButton {
     margin-top: 20px;
     padding: 10px 20px;
     font-size: 18px;
     cursor: pointer;
 }
-
-.game-over {
-    display: none;
-    /* otros estilos existentes */
-}
-
 .pause-button {
     position: absolute;
     top: 10px;
     right: 10px;
     padding: 10px 20px;
     font-size: 18px;
+    cursor: pointer;
+}
+#playButton {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 10px 20px;
+    font-size: 18px;
+    cursor: pointer;;
+}
+
+#pauseButton, #playButton {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 24px;
+    padding: 10px;
+    background-color: transparent;
+    border: none;
+    color: white;
     cursor: pointer;
 }

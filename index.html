@@ -8,18 +8,31 @@
 </head>
 <body>
     <div id="introScreen">
-        <h1>Romantic Shooter Game</h1>
-        <p>Una aventura romántica, conquista la luna siendo un sol de persona. ¡Buena suerte!</p>
+        <h1>Luna y Sol</h1>
+        <p class="descripcion">Una aventura romántica, conquista la luna siendo un sol de persona. ¡Buena suerte!</p>
         <button id="startButton">Start</button>
+        <button id="detailsButton">Detalles del juego</button>
     </div>
-    <div class="score"> Puntos: <span id="score">0</span></div>
+    <div id="detailsScreen" style="display:none;">
+        <h1>Instrucciones</h1>
+        <h3>Objetivo: Dispara corazones a todas las lunas y no dejes que te toquen sin haberles dado con algún corazón</h3>
+        <p class="descripcion">
+            <span class="tecla">&#8593;</span>: moverse para arriba<br>
+            <span class="tecla">&#8595;</span>: moverse para abajo<br>
+            <span class="tecla">&#8592;</span>: moverse a la izquierda<br>
+            <span class="tecla">&#8594;</span>: moverse a la derecha<br>
+            <span class="tecla">&#9251;</span>: disparar corazones<br>
+            <span class="tecla">P</span>: Pausa/Play
+        </p>
+        
+        
+        <button id="backButton">Volver</button>
+    </div>
+    <div class="score">Puntos: <span id="score">0</span></div>
     <div class="game-over" id="gameOver">Moon Over!</div>
-    <button id="pauseButton" class="pause-button">Pause</button>
+    <button id="pauseButton" class="pause-button">&#10074;&#10074;</button>
+    <button id="playButton" class="play-button" style="display:none;">&#9654;</button>
     <canvas id="gameCanvas"></canvas>
     <script src="logica.js"></script>
 </body>
 </html>
-
-
-
-
