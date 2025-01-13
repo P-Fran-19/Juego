@@ -93,10 +93,10 @@ function spawnEnemy() {
 function spawnBoss() {
     boss = {
         x: 300,
-        y: -200,
+        y: -470,
         width: 700, // Tamaño visual del jefe
         height: 700,
-        speed: 0.5,
+        speed: 1,
         health: 20,
         hitboxX: 260, // Ajuste desde el borde izquierdo
         hitboxY: 280, // Ajuste desde el borde superior
@@ -122,13 +122,13 @@ function gameLoop() {
         bullet.y -= bullet.speed;
 
         if (bullet.y < 0) {
-            bullets.splice(i, 1);
+            bullets.splice(i, 1); // evitamos que ocupe memoria
         } else {
             drawImage(heartImage, bullet.x, bullet.y, bullet.width, bullet.height);
         }
     }
 
-    // Genera enemigos
+    // Genera enemigos /////// tenemos que generar una funcion para aumentar la cantidad segun el tiempo y que mejore la velocidad como parametro spawnEnemy
     if (Math.random() < 0.02) spawnEnemy();
 
     // Actualiza los enemigos
@@ -168,17 +168,17 @@ function gameLoop() {
                 enemies.splice(i, 1);
                 score += 10;
                 scoreElement.textContent = score;
-                break;
+                break; // mala practica revisar otra opcion
             }
         }
     }
 
     // Lógica del jefe
-    if (score === 99) {
+    if (score === 90) {
         spawnBoss(); // Aparece el jefe cuando se alcanza una puntuación de 100
     }
-    if (score === 500 && !boss) {
-        spawnBoss(); // Aparece el jefe cuando se alcanza una puntuación de 100
+    if (score === 490) {
+        spawnBoss(); // Aparece el jefe cuando se alcanza una puntuación de 500
         spawnBoss();
     }
 
@@ -216,7 +216,7 @@ function gameLoop() {
                     score += 50; // Puntos adicionales por derrotar al jefe
                     scoreElement.textContent = score;
                 }
-                break;
+                break;// mala practica 
             }
         }
     }
@@ -226,23 +226,27 @@ function gameLoop() {
 
 // Función para finalizar el juego
 function gameOver() {
-    gameStarted = false;
-    isPaused = false;
-    cancelAnimationFrame(gameInterval); // Detiene el bucle del juego
-    gameOverElement.style.display = 'block';
-    introScreen.style.display = 'block'; // Muestra la pantalla de introducción de nuevo
-    gameOverElement.textContent = "Moon Over! Your score: " + score;
+    document.getElementById('gameCanvas').style.display = 'none';
+    document.getElementById('gameOver').style.display = 'block';
+    
+    // Mostrar el botón de reinicio
+    const restartButton = document.getElementById('restartButton');
+    restartButton.style.display = 'block';
+
+    // Asignar la acción de reinicio al botón
+    restartButton.onclick = () => {
+        document.getElementById('gameOver').style.display = 'none';
+        restartButton.style.display = 'none'; // Ocultar el botón después de usarlo
+        restartGame(); // Llama a la función para reiniciar el juego
+    };
 }
 
-// Función para alternar la pausa
-function togglePause() {
-    if (!gameStarted) return; // No hacer nada si el juego no ha comenzado
-    isPaused = !isPaused; // Cambiar el estado de pausa
-    if (isPaused) {
-        cancelAnimationFrame(gameInterval); // Detiene el bucle del juego
-    } else {
-        gameLoop(); // Reanuda el bucle del juego
-    }
+// Función para reiniciar el juego
+function restartGame() {
+    // Restablece el estado inicial del juego
+    document.getElementById('gameCanvas').style.display = 'block';
+    document.getElementById('score').textContent = '0'; // Reinicia el puntaje
+    startGame(); // Llama a tu función principal para iniciar el juego
 }
 
 
@@ -274,7 +278,6 @@ function startGame() {
     introScreen.style.display = 'none';
     enemies.length = 0;
     bullets.length = 0;
-    boss = null; // Reinicia el jefe
     player.x = canvas.width / 2;
     player.y = canvas.height - 80;
     gameStarted = true;

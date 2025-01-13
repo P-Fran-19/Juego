@@ -29,7 +29,10 @@
         <button id="backButton">Volver</button>
     </div>
     <div class="score">Puntos: <span id="score">0</span></div>
-    <div class="game-over" id="gameOver">Moon Over!</div>
+    <div class="game-over" id="gameOver" style="display: none;">
+        <p class="game-over-text">Moon Over!</p>
+        <button id="restartButton" class="restart-btn" style="display: none;">Reiniciar</button>
+    </div>    
     <button id="pauseButton" class="pause-button">&#10074;&#10074;</button>
     <button id="playButton" class="play-button" style="display:none;">&#9654;</button>
     <canvas id="gameCanvas"></canvas>

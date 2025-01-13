@@ -1,49 +1,59 @@
+/* Estilo general del cuerpo */
 body {
     margin: 0;
     overflow: hidden;
-    font-family: Arial, sans-serif;
+    font-family: 'Arial', sans-serif;
     background: linear-gradient(to bottom, #001f3f, #011a33);
     color: white;
     background: url('fondo.png') no-repeat center center fixed;
     background-size: cover;
 }
 
+/* Canvas principal */
 canvas {
     display: block;
+    border: none;
 }
 
+/* Texto descriptivo */
 .descripcion {
-    font-size: 22px; /* Cambia el tamaño de la letra */
-    font-family: 'Arial', sans-serif; /* Cambia el tipo de letra */
+    font-size: 22px;
+    line-height: 1.6;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
 }
 
-
+/* Puntuación */
 .score {
     position: absolute;
     top: 10px;
     left: 10px;
-    font-size: 20px;
-}
-.game-over {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 36px;
-    display: none;
-    background-color: red;
-}
-.pause-button {
-    position: absolute;
-    top: 20px;
-    right: 20px;
+    font-size: 22px;
+    background: rgba(0, 0, 0, 0.6);
     padding: 10px 20px;
-    font-size: 18px;
-    background-color: rgb(11, 23, 139);
+    border-radius: 8px;
     color: white;
-    border: none;
-    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+/* Botones principales */
+button {
+    margin-top: 20px;
+    padding: 12px 25px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+/* Pantalla de inicio */
 #introScreen {
     position: absolute;
     top: 50%;
@@ -51,42 +61,107 @@ canvas {
     transform: translate(-50%, -50%);
     text-align: center;
     background-color: rgba(0, 0, 0, 0.8);
-    padding: 20px;
+    padding: 30px;
     border-radius: 10px;
+    color: white;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+#startButton, #detailsButton, #backButton {
+    background-color: #004080;
     color: white;
 }
 
-#startButton, #pauseButton, #detailsButton, #backButton {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 18px;
-    cursor: pointer;
-}
-.pause-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 10px 20px;
-    font-size: 18px;
-    cursor: pointer;
-}
-#playButton {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    padding: 10px 20px;
-    font-size: 18px;
-    cursor: pointer;;
+#startButton:hover, #detailsButton:hover, #backButton:hover {
+    background-color: #0059b3;
 }
 
-#pauseButton, #playButton {
+/* Botón de pausa/despausa */
+.pause-button, .play-button {
     position: absolute;
     top: 10px;
-    left: 10px;
+    right: 10px; /* Movido a la derecha */
     font-size: 24px;
     padding: 10px;
     background-color: transparent;
     border: none;
     color: white;
     cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+}
+
+.pause-button:hover, .play-button:hover {
+    transform: scale(1.2);
+}
+
+/* Texto de detalles */
+#detailsText {
+    text-align: left; /* Alineado a la izquierda */
+    font-size: 20px;
+    margin: 10px;
+    color: white;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 15px;
+    border-radius: 8px;
+}
+
+/* Pantalla de Game Over */
+.game-over {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 0, 0, 0.9); /* Fondo rojo intenso */
+    color: white;
+    font-family: 'Arial', sans-serif;
+    z-index: 1000;
+    text-align: center;
+}
+
+.game-over-text {
+    font-size: 5rem; /* Texto grande */
+    font-weight: bold;
+    text-transform: uppercase;
+    animation: glow 1.5s infinite alternate; /* Efecto de brillo */
+    margin-bottom: 20px; /* Espacio para el botón */
+}
+
+/* Botón de reinicio */
+.restart-btn {
+    background-color: #ffffff;
+    color: #ff0000;
+    font-size: 1.8rem; /* Más grande */
+    font-weight: bold;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.restart-btn:hover {
+    background-color: #ffcccc;
+    color: #990000;
+    transform: scale(1.2); /* Aumenta ligeramente el tamaño */
+}
+
+/* Transición suave para botones */
+button {
+    transition: all 0.3s ease;
+}
+
+/* Efecto de brillo */
+@keyframes glow {
+    from {
+        text-shadow: 0 0 10px #ffffff, 0 0 20px #ffcccc, 0 0 30px #ffffff;
+    }
+    to {
+        text-shadow: 0 0 20px #ffffff, 0 0 40px #ffcccc, 0 0 50px #ffffff;
+    }
 }
