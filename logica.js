@@ -1,3 +1,15 @@
+document.getElementById('startButton').addEventListener('click', function() {
+    document.getElementById('backgroundMusic').play();
+});
+
+document.getElementById('pauseButton').addEventListener('click', function() {
+    document.getElementById('backgroundMusic').pause();
+});
+
+document.getElementById('playButton').addEventListener('click', function() {
+    document.getElementById('backgroundMusic').play();
+});
+
 // Configuración principal
 const canvas = document.getElementById('gameCanvas');
 const ctx = canvas.getContext('2d');
@@ -48,6 +60,7 @@ const player = {
 
 const bullets = [];
 const enemies = [];
+const fecha = new Date();
 
 const sunImage = new Image();
 sunImage.src = 'sol.png';
