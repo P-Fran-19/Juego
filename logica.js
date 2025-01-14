@@ -58,9 +58,26 @@ const player = {
     hitboxHeight: 30, // Alto de la hitbox más pequeño
 };
 
-const bullets = [];
+const bullets = [];// Función para generar enemigos
+function spawnEnemy() {
+    const fechaActual = Date.now();
+    const tiempoTranscurrido = Math.floor((fechaActual - fechaInicial) / 1000); // Redondear a segundos
+
+    const enemy = {
+        x: Math.random() * (canvas.width - 80), // Ajustado para el nuevo tamaño
+        y: -80, // Ajustado para el nuevo tamaño
+        width: 80, // Tamaño visual aumentado
+        height: 80,
+        speed: 3 + tiempoTranscurrido * 0.5, // Aumentar la velocidad con el tiempo
+        hitboxX: 20, // Ajuste desde el borde izquierdo
+        hitboxY: 12, // Ajuste desde el borde superior
+        hitboxWidth: 34.5, // Hitbox más pequeño en ancho
+        hitboxHeight: 40, // Hitbox más pequeño en alto
+    };
+    enemies.push(enemy);
+}
 const enemies = [];
-const fecha = new Date();
+let fechaInicial = new Date();
 
 const sunImage = new Image();
 sunImage.src = 'sol.png';
@@ -88,12 +105,14 @@ function drawHitbox(x, y, width, height, color = 'transparent') {
 
 // Función para generar enemigos
 function spawnEnemy() {
+    const fechaActual = Date.now();
+    const tiempoTranscurrido = Math.floor((fechaActual - fechaInicial) / 1000); // Redondear a segundos
     const enemy = {
         x: Math.random() * (canvas.width - 80), // Ajustado para el nuevo tamaño
         y: -80, // Ajustado para el nuevo tamaño
         width: 80, // Tamaño visual aumentado
         height: 80,
-        speed: 3 + Math.random() * 2,
+        speed: tiempoTranscurrido * 0.2, // Aumentar la velocidad con el tiempo
         hitboxX: 20, // Ajuste desde el borde izquierdo
         hitboxY: 12, // Ajuste desde el borde superior
         hitboxWidth: 34.5, // Hitbox más pequeño en ancho
@@ -187,14 +206,9 @@ function gameLoop() {
     }
 
     // Lógica del jefe
-    if (score === 90) {
+    if (score === 90 || score === 490) {
         spawnBoss(); // Aparece el jefe cuando se alcanza una puntuación de 100
     }
-    if (score === 490) {
-        spawnBoss(); // Aparece el jefe cuando se alcanza una puntuación de 500
-        spawnBoss();
-    }
-
     if (boss) {
         boss.y += boss.speed; // Movimiento del jefe
         drawImage(moonImage, boss.x, boss.y, boss.width, boss.height);
@@ -259,6 +273,7 @@ function restartGame() {
     // Restablece el estado inicial del juego
     document.getElementById('gameCanvas').style.display = 'block';
     document.getElementById('score').textContent = '0'; // Reinicia el puntaje
+    boss='none';
     startGame(); // Llama a tu función principal para iniciar el juego
 }
 
