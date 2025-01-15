@@ -206,8 +206,8 @@ function gameLoop() {
     }
 
     // Lógica del jefe
-    if (score === 90 || score === 490) {
-        spawnBoss(); // Aparece el jefe cuando se alcanza una puntuación de 100
+    if (score % 100 === 0 && score != 0) {
+        spawnBoss(); // Genera al jefe
     }
     if (boss) {
         boss.y += boss.speed; // Movimiento del jefe
@@ -348,10 +348,16 @@ startButton.addEventListener('click', startGame);
 document.addEventListener('keydown', (e) => {
     if (!gameStarted) return;
 
-    if (e.key === 'ArrowLeft' && player.x > 0) {
+    if (e.key === 'ArrowLeft') {
         player.x -= player.speed;
-    } else if (e.key === 'ArrowRight' && player.x + player.width < canvas.width) {
+        if (player.x + player.width < 0) {
+            player.x = canvas.width; // Aparece en el borde derecho
+        }
+    } else if (e.key === 'ArrowRight') {
         player.x += player.speed;
+        if (player.x > canvas.width) {
+            player.x = -player.width; // Aparece en el borde izquierdo
+        }
     } else if (e.key === 'ArrowUp' && player.y > 0) {
         player.y -= player.speed;
     } else if (e.key === 'ArrowDown' && player.y + player.height < canvas.height) {
@@ -368,6 +374,7 @@ document.addEventListener('keydown', (e) => {
         togglePause(); // Pausa al presionar 'P'
     }
 });
+
 
 // Comienza el juego
 gameLoop();
