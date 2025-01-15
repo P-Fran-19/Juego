@@ -251,14 +251,38 @@ function gameLoop() {
     gameInterval = requestAnimationFrame(gameLoop); // Llama al siguiente cuadro
 }
 
-// Función para finalizar el juego
 function gameOver() {
     document.getElementById('gameCanvas').style.display = 'none';
     document.getElementById('gameOver').style.display = 'block';
+
+    // Tabla
+    const scoreTable = document.getElementById("scoreTable").querySelector("tbody");
     
+    // Agregar nueva fila
+    const newRow = scoreTable.insertRow();
+    const cellIndex = newRow.insertCell(0);
+    const cellScore = newRow.insertCell(1);
+    cellIndex.textContent = "Milu";
+    cellScore.textContent = score;
+
+    // Ordenar la tabla de mayor a menor por puntaje
+    const rows = Array.from(scoreTable.rows); // Convertir las filas de la tabla a un array
+    rows.sort((a, b) => {
+        const scoreA = parseInt(a.cells[1].textContent, 10); // Obtener el puntaje de la celda 1
+        const scoreB = parseInt(b.cells[1].textContent, 10);
+        return scoreB - scoreA; // Ordenar de mayor a menor
+    });
+
+    // Vaciar la tabla y volver a agregar las filas ordenadas
+    scoreTable.innerHTML = ""; 
+    rows.forEach(row => scoreTable.appendChild(row));
+
     // Mostrar el botón de reinicio
     const restartButton = document.getElementById('restartButton');
     restartButton.style.display = 'block';
+
+    const PuntajeFinal = document.getElementById("finalScore");
+    PuntajeFinal.textContent = `Puntaje: ${score}`;
 
     // Asignar la acción de reinicio al botón
     restartButton.onclick = () => {
@@ -268,11 +292,13 @@ function gameOver() {
     };
 }
 
+
 // Función para reiniciar el juego
 function restartGame() {
     // Restablece el estado inicial del juego
     document.getElementById('gameCanvas').style.display = 'block';
     document.getElementById('score').textContent = '0'; // Reinicia el puntaje
+    fechaInicial = new Date();
     boss='none';
     startGame(); // Llama a tu función principal para iniciar el juego
 }
